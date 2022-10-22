@@ -10,8 +10,8 @@ local function Theme()
         emphasis = c.gray8,
     }
     local Shade = {
-        default = c.gray3,
-        emphasis = c.gray1,
+        default = 'NONE', -- 原本是 c.gray3
+        emphasis = 'NONE', -- 原本是 c.gray1
     }
     local Background = {
         emphasis = c.gray2,
@@ -454,3 +454,4 @@ local function Theme()
 end
 
 return { Theme = Theme }
+

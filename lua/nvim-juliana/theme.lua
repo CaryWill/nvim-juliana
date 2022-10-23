@@ -63,10 +63,10 @@ local function Theme()
 
     hl.CursorLine = { bg = Background.muted }
     hl.CursorColumn = { bg = Background.muted }
-    hl.LineNr = { bg = Background.muted, fg = Foreground.emphasis }
+    hl.LineNr = { fg = Foreground.emphasis }
     hl.LineNrAbove = { fg = Foreground.muted }
     hl.LineNrBelow = { fg = Foreground.muted }
-    hl.CursorLineNr = { link = 'LineNr' }
+    hl.CursorLineNr = { bg= Background.muted, fg=Foreground.default, bold = true }
 
 		-- Diff use github theme for git diff
     hl.diffAdded = { fg = github.add_fg, bg = github.add }

@@ -25,6 +25,22 @@ local function Theme()
     local Info = c.green
     local Warn = c.orange2
 
+    local github = {
+       add = '#244032',
+       add_fg = '#56d364',
+       change = '#341a00',
+       change_fg = '#e3b341',
+       delete = '#462c32',
+       delete_fg = '#f85149',
+       gutter_fg = '#e1e4e8',
+       fg_light = '#d1d5da',
+       yellow = '#ffea7f',
+       orange = '#d18616',
+       blue = '#2188ff',
+       magenta = '#b392f0',
+       mantis = "#70b950",
+    }
+
     ---@type HighlightDefMap[]
     local hl = {}
 
@@ -52,10 +68,22 @@ local function Theme()
     hl.LineNrBelow = { fg = Foreground.muted }
     hl.CursorLineNr = { link = 'LineNr' }
 
-    hl.DiffAdd = { sp = c.green, underline = true }
-    hl.DiffChange = { sp = c.red, underline = true }
-    hl.DiffDelete = { fg = Foreground.muted }
-    hl.DiffText = { italic = true }
+		-- Diff use github theme for git diff
+    hl.diffAdded = { fg = github.add_fg, bg = github.add }
+    hl.diffChanged = { fg = github.change_fg, bg = github.change }
+    hl.diffRemoved = { fg = github.delete_fg , bg = github.delete }
+    hl.diffOldFile = { fg = github.yellow }
+    hl.diffNewFile = { fg = github.orange }
+    hl.diffFile = { fg = github.blue }
+    hl.diffLine = { fg = github.gutter_fg }
+    hl.diffIndexLine = { fg = github.magenta }
+    hl.DiffAdd = { fg = github.add_fg, bg = github.add }
+    hl.DiffChange = { fg = github.change_fg, bg = github.change }
+    hl.DiffDelete = { fg = github.delete_fg, bg = github.delete }
+    hl.DiffText = { fg = github.gutter_fg }
+    hl.DiffviewFilePanelFileName = { fg = github.fg_light }
+    hl.gitcommitSummary = { fg = github.mantis }
+
     hl.Directory = { fg = c.cyan }
     hl.EndOfBuffer = { fg = Foreground.surface }
     hl.Error = { fg = c.red2, bg = Shade.default }
@@ -246,9 +274,6 @@ local function Theme()
     -- hl['@warning'] = { fg = c.orange2, bold = true, bg = Shade.default }
 
     hl.htmlTagName = { link = 'Tag' }
-    hl.gitCommitSelectedFile = { italic = true }
-    hl.gitCommitSummary = { bold = true }
-    hl.gitCommitTrailerToken = { fg = c.pink, italic = true }
     hl.healthHelp = { fg = c.yellow, bg = Shade.default }
     hl.healthSuccess = { fg = c.green, bg = Shade.default }
 
@@ -324,10 +349,6 @@ local function Theme()
     hl.Sneak = { fg = c.gray0, bg = c.orange2 }
     hl.SneakLabel = { fg = c.gray0, bg = c.orange2 }
 
-    hl.GitSignsDelete = { fg = c.red, bold = true }
-    hl.GitSignsChange = { fg = c.yellow, bold = true }
-    hl.GitSignsAdd = { fg = c.green, bold = true }
-
     hl.packerHash = { fg = c.red }
     hl.packerString = { fg = c.green }
     hl.packerStatusSuccess = { fg = c.green }
@@ -347,63 +368,6 @@ local function Theme()
     hl.FocusedSymbol = { bg = Background.muted }
     hl.TroubleIndent = { bg = Background.default }
     hl.TroubleLocation = { bold = true }
-
-    hl.NvimTreeNormal = { fg = Foreground.default, bg = Background.emphasis }
-    hl.NvimTreeRootFolder = { fg = Foreground.default, bg = Background.emphasis }
-    hl.NvimTreeIndentMarker = { fg = Foreground.default, bg = Background.emphasis }
-    hl.NvimTreeOpenedFolderName = { underdotted = true }
-    hl.NvimTreeFolderName = { fg = Foreground.default, bg = Shade.default }
-    hl.NvimTreeEmptyFolderName = { link = 'Comment' }
-    hl.NvimTreeFolderIcon = { fg = Foreground.muted }
-    hl.NvimTreeExecFile = { fg = c.green, bold = true, bg = Shade.default }
-    hl.NvimTreeFileDeleted = { link = 'Comment' }
-    hl.NvimTreeFileNew = { fg = Background.emphasis, bg = Shade.default }
-    hl.NvimTreeSpecialFile = { fg = Foreground.default, bg = Shade.default }
-
-    hl.NvimTreeGitDirty = { fg = c.red, bg = Shade.default }
-    hl.NvimTreeGitStaged = { fg = c.green, bg = Shade.default }
-    hl.NvimTreeGitRenamed = { fg = c.orange2, bg = Shade.default }
-    hl.NvimTreeGitDeleted = { fg = c.red, bg = Shade.default }
-    hl.NvimTreeSymlink = { fg = c.cyan, bg = Shade.default }
-
-    hl.NotifyERRORBorder = { fg = hl.DiagnosticError.fg }
-    hl.NotifyWARNBorder = { fg = hl.DiagnosticWarn.fg }
-    hl.NotifyINFOBorder = { fg = hl.DiagnosticInfo.fg }
-    hl.NotifyDEBUGBorder = { fg = Debug, bg = Shade.default }
-    hl.NotifyTRACEBorder = { fg = Trace, bg = Shade.default }
-    hl.NotifyERRORIcon = { fg = hl.DiagnosticError.fg }
-    hl.NotifyWARNIcon = { fg = hl.DiagnosticWarn.fg }
-    hl.NotifyINFOIcon = { fg = hl.DiagnosticInfo.fg }
-    hl.NotifyDEBUGIcon = { fg = Debug, bg = Shade.default }
-    hl.NotifyTRACEIcon = { fg = Trace, bg = Shade.default }
-    hl.NotifyERRORTitle = { fg = hl.DiagnosticError.fg, bold = true }
-    hl.NotifyWARNTitle = { fg = hl.DiagnosticWarn.fg, bold = true }
-    hl.NotifyINFOTitle = { fg = hl.DiagnosticInfo.fg, bold = true }
-    hl.NotifyDEBUGTitle = { fg = Debug, bold = true, bg = Shade.default }
-    hl.NotifyTRACETitle = { fg = Trace, bold = true, bg = Shade.default }
-    hl.NotifyERRORBody = { fg = Foreground.default, bg = Shade.default }
-    hl.NotifyWARNBody = { fg = Foreground.default, bg = Shade.default }
-    hl.NotifyINFOBody = { fg = Foreground.default, bg = Shade.default }
-    hl.NotifyDEBUGBody = { fg = Foreground.default, bg = Shade.default }
-    hl.NotifyTRACEBody = { fg = Foreground.default, bg = Shade.default }
-
-    hl.DevIconGitAttributes = { fg = c.cyan }
-    hl.DevIconGitCommit = { fg = c.red }
-    hl.DevIconGitConfig = { fg = c.cyan }
-    hl.DevIconGitIgnore = { fg = c.red }
-    hl.DevIconGitModules = { fg = c.cyan }
-    hl.DevIconDropbox = { fg = c.blue0 }
-    hl.DevIconToml = { fg = c.cyan }
-    hl.DevIconYaml = { link = 'DevIconToml' }
-    hl.DevIconJson = { fg = c.orange2 }
-    hl.DevIconYml = { link = 'DevIconToml' }
-    hl.DevIconMd = { fg = c.gray9 }
-    hl.DevIconGo = { fg = c.blue0 }
-    hl.DevIconTs = { fg = c.blue0 }
-    hl.DevIconTsx = { fg = c.blue0 }
-    hl.DevIconDsStore = { fg = c.gray6 }
-    hl.DevIconDockerfile = { fg = c.blue0 }
-    hl.DevIconScheme = { fg = c.gray9 }
 
     hl.LspNamespace = { link = '@namespace' }
     hl.LspType = { link = '@type' }
